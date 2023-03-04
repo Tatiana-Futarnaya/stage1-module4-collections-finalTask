@@ -12,20 +12,17 @@ public class DeveloperProjectFinder {
                 }
             }
         }
-        Collections.sort(list,new ListComparator());
+        Comparator c=Collections.reverseOrder();
+        Collections.sort(list,c);
+        String tmp=null;
+        for (int i=1; i<list.size();i++){
+            if(list.get(i-1).length()<list.get(i).length()){
+                tmp=list.get(i-1);
+                list.set(i-1,list.get(i));
+                list.set(i,tmp);
+            }
+        }
         return list;
     }
 }
 
-class ListComparator implements Comparator<String>{
-
-    @Override
-    public int compare(String o1, String o2) {
-        int result=0;
-        if(o1.length()<o2.length()){
-            result=1;
-        }
-
-        return result;
-    }
-}
